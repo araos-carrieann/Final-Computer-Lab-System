@@ -76,20 +76,21 @@ public class ComLabMethods {
         return BCrypt.checkpw(password, hashedPassword);
     }
 
-    public static String getUserDetails(String email, String password) {
+    public static String getUserDetails(String stuFaculID, String password) {
         String userRole = "";
         String studFaculID;
-        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE email = ?")) {
-            stmt.setString(1, email);
+        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE studentfacultyID = ?")) {
+            stmt.setString(1, stuFaculID);
             ResultSet rsltSet = stmt.executeQuery();
 
             if (rsltSet.next()) {
                 String storedHashedPassword = rsltSet.getString("password");
                 if (ComLabMethods.verifyPassword(password, storedHashedPassword)) {
-                    String fname = rsltSet.getString("firstName");
-                    String lname = rsltSet.getString("lastname");
-                    userRole = rsltSet.getString("role");
                     studFaculID = rsltSet.getString("studentfacultyID");
+                    String fname = rsltSet.getString("firstName");
+                    String lname = rsltSet.getString("lastName");
+                    userRole = rsltSet.getString("role");
+                    
                     return studFaculID + "," + fname + "," + lname  + "," + userRole;
                 }
             }
@@ -102,11 +103,11 @@ public class ComLabMethods {
 
 public static void logUserLogin(String stuFaculID, String fullName, String pass) {
     try (Connection conn = DatabaseConnector.getConnection(); Statement stmt = conn.createStatement()) {
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS logs (logID SERIAL PRIMARY KEY, "
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS logs (id SERIAL PRIMARY KEY, "
                 + "user_id INTEGER REFERENCES users(id), "
                 + "fullname VARCHAR(255), "
                 + "login_time TIMESTAMP DEFAULT (TO_TIMESTAMP(TO_CHAR(CURRENT_TIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS')), "
-                + "logout_time TIMESTAMP DEFAULT (TO_TIMESTAMP(TO_CHAR(CURRENT_TIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS')))";
+                + "logout_time VARCHAR(255))";
 
         try (PreparedStatement statement = conn.prepareStatement(createTableQuery)) {
             statement.execute();
@@ -126,6 +127,7 @@ public static void logUserLogin(String stuFaculID, String fullName, String pass)
 }
 
 
+
     //ADMIN DASHBOARD
     //ACCOUNTS 
     public static List<Data> getAllStudentDatas() {
@@ -134,11 +136,11 @@ public static void logUserLogin(String stuFaculID, String fullName, String pass)
 
             while (rsltSet.next()) {
                 String studentID = rsltSet.getString("studentfacultyID");
-                String userEmail = rsltSet.getString("userEmail");
+                String userEmail = rsltSet.getString("email");
                 String userFname = rsltSet.getString("firstName");
                 String userLname = rsltSet.getString("lastName");
                 String userProgram = rsltSet.getString("program");
-                String userYrLvl = rsltSet.getString("yrLvl");
+                String userYrLvl = rsltSet.getString("yearLvl");
 
                 Data data = new Data(studentID, userEmail, userFname, userLname, userProgram, userYrLvl);
                 dataList.add(data);
@@ -157,7 +159,7 @@ public static void logUserLogin(String stuFaculID, String fullName, String pass)
             while (rsltSet.next()) {
                 String facultyID = rsltSet.getString("studentfacultyID");
                 String userDepartment = rsltSet.getString("department");
-                String userEmail = rsltSet.getString("userEmail");
+                String userEmail = rsltSet.getString("email");
                 String userFname = rsltSet.getString("firstName");
                 String userLname = rsltSet.getString("lastName");
 
@@ -211,5 +213,19 @@ public static void logUserLogin(String stuFaculID, String fullName, String pass)
             e.printStackTrace();
         }
     }
+    
+    //Delete
 
+     public static void deleteAcct(String studentID) {
+        try (Connection conn = DatabaseConnector.getConnection(); Statement stmt = conn.createStatement()) {
+            String updateQuery = "UPDATE users SET status = 'DEACTIVATE' WHERE studentfacultyID = ?";
+
+            try (PreparedStatement statement = conn.prepareStatement(updateQuery)) {
+                statement.setString(1, studentID);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

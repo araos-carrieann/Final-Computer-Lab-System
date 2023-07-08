@@ -64,13 +64,15 @@ public class Data {
     }
 
     //Faculty account
-    public Data(String studentfacultyID, String role, String firstName, String lastName, String email) {
+
+    public Data(String studentfacultyID, String department, String firstName, String lastName, String email) {
         this.studentfacultyID = studentfacultyID;
-        this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.department = department;
     }
+   
 
     //Get Logs
     public int getUserID() {

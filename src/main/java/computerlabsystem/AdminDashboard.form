@@ -285,7 +285,7 @@
                                           <EmptySpace min="180" pref="180" max="-2" attributes="0"/>
                                           <Component id="btnDeleteStuAcct" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="58" pref="58" max="-2" attributes="0"/>
-                                          <Component id="btnAddStuAcct1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnAddStudentAcct" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="375" max="32767" attributes="0"/>
@@ -307,7 +307,7 @@
                                   <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="btnDeleteStuAcct" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnAddStuAcct1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnAddStudentAcct" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
                                   <Component id="studentAcctPane" min="-2" pref="402" max="-2" attributes="0"/>
@@ -320,6 +320,9 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="DELETE"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteStuAcctActionPerformed"/>
+                          </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="studentAcctPane">
 
@@ -383,10 +386,13 @@
                             <Property name="text" type="java.lang.String" value="jLabel1"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="btnAddStuAcct1">
+                        <Component class="javax.swing.JButton" name="btnAddStudentAcct">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="ADD USER"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddStudentAcctActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtSearchAcct">
                           <Properties>
@@ -429,9 +435,9 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="btnDeleteStuAcct1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDeleteFacultyAcct" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                                  <Component id="btnAddStuAcct2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnAddFacultyAccount" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="283" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -446,8 +452,8 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="btnAddStuAcct2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnDeleteStuAcct1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnAddFacultyAccount" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnDeleteFacultyAcct" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="facultyAcctPane" min="-2" pref="321" max="-2" attributes="0"/>
@@ -462,15 +468,21 @@
                             <Property name="text" type="java.lang.String" value="jLabel1"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="btnDeleteStuAcct1">
+                        <Component class="javax.swing.JButton" name="btnDeleteFacultyAcct">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="DELETE"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteFacultyAcctActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="btnAddStuAcct2">
+                        <Component class="javax.swing.JButton" name="btnAddFacultyAccount">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="ADD USER"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddFacultyAccountActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtSearchAcct2">
                           <Properties>
